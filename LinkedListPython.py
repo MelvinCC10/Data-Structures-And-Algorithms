@@ -7,20 +7,33 @@ class Node():
         self.next = next
 
 
+class LinkedList():
+
+    def __init__(self):
+        self.len = 0
+        self.head = -1
+        self.tail = -1
+
+
+    def append(self, data, next = None):
+        if self.head == -1:
+            self.head = Node(data)
+            self.tail = self.head
+        else:
+            self.tail.next = Node(data)
+            self.tail = self.tail.next
+
+
+
 """ Example """
+linked_list = LinkedList()
 
-node1 = Node("5")
-node2 = Node("7")
-node3 = Node("4")
-node4 = Node("2")
+for i in range(10):
+    linked_list.append(i)
 
-node1.next = node2
-node2.next = node3
-node3.next = node4
 
-next = True
-currentnode = node1
-
-while next:
-    print(currentnode.data)
-    currentnode = currentnode.next
+data = True
+traverse_point = linked_list.head
+while data != False:
+    print(str(traverse_point.data))
+    traverse_point = traverse_point.next
