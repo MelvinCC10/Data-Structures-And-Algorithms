@@ -6,7 +6,6 @@ class Node():
         self.data = data
         self.next = next
 
-
 class LinkedList():
 
     def __init__(self):
@@ -14,14 +13,16 @@ class LinkedList():
         self.head = -1
         self.tail = -1
 
-
     def append(self, data, next = None):
         if self.head == -1:
             self.head = Node(data)
             self.tail = self.head
+            len += 1
         else:
             self.tail.next = Node(data)
             self.tail = self.tail.next
+            len += 1
+
 
 
 
