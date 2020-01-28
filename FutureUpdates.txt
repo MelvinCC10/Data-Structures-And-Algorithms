@@ -1,0 +1,6 @@
+In progress:
+- Create a Doubly linked list
+
+
+Done:
+- Update add a linked list class to LinkedListInPython.py to contain all nodes
