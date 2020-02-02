@@ -34,6 +34,7 @@ class LinkedList():
         new_node.next = traverse_point.next
         traverse_point.next = new_node
 
+
 class DoublyNode():
 
     def __init__(self, data, next = None, prev = None):
@@ -76,6 +77,16 @@ class DoublyLinkedList():
         traverse_point.next.prev = new_node
         traverse_point.next = new_node
 
+    def remove(self,data):
+        """ Remove a node """
+        traverse_point = self.head
+        while traverse_point.data != data:
+            traverse_point = traverse_point.next
+
+        traverse_point.prev.next = traverse_point.next
+        traverse_point.next.prev = traverse_point.prev
+
+
 
 """ Example """
 
@@ -86,6 +97,7 @@ for i in range(10):
 
 # Insert a 22  between 3 and 4
 linked_list.insert(22,3,4)
+linked_list.remove(5)
 
 # Traverse Forward
 traverse_point = linked_list.head
@@ -96,7 +108,7 @@ print(str(traverse_point.data))
 print("\n")
 
 # Traverse Backwards
-while traverse_point.prev:
+while traverse_point.prev :
     print(str(traverse_point.data))
     traverse_point = traverse_point.prev
 print(str(traverse_point.data))
