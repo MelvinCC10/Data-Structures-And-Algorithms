@@ -49,25 +49,29 @@ class DoublyLinkedList():
         self.head = None
         self.tail = None
 
+
     def append(self, data):
         """ Adds a Node to the end of the linked list"""
         if self.head == None:
-            self.head = Node(data)
+            self.head = DoublyNode(data)
             self.tail = self.head
             self.len += 1
         else:
-            self.tail.next = Node(data)
+            self.tail.next = DoublyNode(data)
             self.tail.next.prev = self.tail
             self.tail = self.tail.next
             self.len += 1
 
+
     def insert(self, data, node1, node2):
         """ Inserts a node between to other nodes """
+
+        # Traversing to node1
         traverse_point = self.head
-        while traverse_point.data != node1 and traverse_point.next.data != node2:
+        while ((traverse_point.data != node1) and (traverse_point.next.data != node2)):
             traverse_point = traverse_point.next
 
-        new_node = Node(data)
+        new_node = DoublyNode(data)
 
         # Setting new nodes next and prev to node1 and node2 respectivly
         new_node.next = traverse_point.next
@@ -77,14 +81,33 @@ class DoublyLinkedList():
         traverse_point.next.prev = new_node
         traverse_point.next = new_node
 
-    def remove(self,data):
-        """ Remove a node """
-        traverse_point = self.head
-        while traverse_point.data != data:
-            traverse_point = traverse_point.next
+        self.len += 1
 
-        traverse_point.prev.next = traverse_point.next
-        traverse_point.next.prev = traverse_point.prev
+
+    def remove(self,data):
+        """ Removing a node """
+
+        # Checking for special case: Head being removed
+        if self.head.data == data:
+            self.head = self.head.next
+            self.head.prev.next = None
+            self.head.prev = None
+        else:
+
+            #Traversing to node to be removed
+            traverse_point = self.head
+            while traverse_point.data != data:
+                traverse_point = traverse_point.next
+
+            # Removing Node
+            traverse_point.prev.next = traverse_point.next
+            traverse_point.next.prev = traverse_point.prev
+            traverse_point.next = None
+            traverse_point.prev = None
+            traverse_point.data = None
+            traverse_point = None
+
+        self.len -= 1
 
 
 
@@ -105,10 +128,17 @@ while traverse_point.next:
     print(str(traverse_point.data))
     traverse_point = traverse_point.next
 print(str(traverse_point.data))
-print("\n")
 
+print('\n\n\n')
+
+print('This linked list has ' + str(linked_list.len) + ' Nodes')
+
+linked_list.remove(0)
 # Traverse Backwards
 while traverse_point.prev :
     print(str(traverse_point.data))
     traverse_point = traverse_point.prev
 print(str(traverse_point.data))
+
+print('\n\n\n')
+print('This linked list has ' + str(linked_list.len) + ' Nodes')
