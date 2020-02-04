@@ -87,27 +87,44 @@ class DoublyLinkedList():
     def remove(self,data):
         """ Removing a node """
 
+        removed = True
+
         # Checking for special case: Head being removed
         if self.head.data == data:
             self.head = self.head.next
             self.head.prev.next = None
             self.head.prev = None
+
+            # Reduce length of list
+            self.len -= 1
+
         else:
 
             #Traversing to node to be removed
             traverse_point = self.head
             while traverse_point.data != data:
-                traverse_point = traverse_point.next
+                if traverse_point.next:
+                    if traverse_point.data == data:
+                        # Removing Node, deallocate memory
+                        traverse_point.prev.next = traverse_point.next
+                        traverse_point.next.prev = traverse_point.prev
+                        traverse_point = None
+                        # Reduce length of list
+                        self.len -= 1
+                        break
 
-            # Removing Node
-            traverse_point.prev.next = traverse_point.next
-            traverse_point.next.prev = traverse_point.prev
-            traverse_point.next = None
-            traverse_point.prev = None
-            traverse_point.data = None
-            traverse_point = None
+                    traverse_point = traverse_point.next
 
-        self.len -= 1
+                else:
+                    print("Node " + str(data) + " does not exist")
+                    removed = False
+                    break
+
+        if removed:
+            print("Node " + str(data) + " removed")
+
+
+
 
 
 
@@ -133,7 +150,7 @@ print('\n\n\n')
 
 print('This linked list has ' + str(linked_list.len) + ' Nodes')
 
-linked_list.remove(0)
+linked_list.remove(65)
 # Traverse Backwards
 while traverse_point.prev :
     print(str(traverse_point.data))
