@@ -63,7 +63,7 @@ class DoublyLinkedList():
             self.len += 1
 
 
-    def insert(self, data, node1, node2):
+    def insert_between(self, data, node1, node2):
         """ Inserts a node between to other nodes """
 
         # Traversing to node1
@@ -124,6 +124,17 @@ class DoublyLinkedList():
             print("Node " + str(data) + " removed")
 
 
+    def head_insert(self, data):
+        """ Insert at the head """
+
+        new_node = DoublyNode(data)
+
+        # Connecting new node to current head and setting node as current head
+        self.head.prev = new_node
+        new_node.next = self.head
+        self.head = new_node
+
+        self.len += 1
 
 
 
@@ -136,8 +147,9 @@ for i in range(10):
     linked_list.append(i)
 
 # Insert a 22  between 3 and 4
-linked_list.insert(22,3,4)
+linked_list.insert_between(22,3,4)
 linked_list.remove(5)
+linked_list.head_insert(55)
 
 # Traverse Forward
 traverse_point = linked_list.head
