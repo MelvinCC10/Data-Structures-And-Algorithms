@@ -4,3 +4,4 @@ In progress:
 
 Done:
 - Update add a linked list class to LinkedListInPython.py to contain all nodes
+- Create a Doubly linked list
